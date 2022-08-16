@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 public class Client {
     public static void main(String[] args){
         String host = "127.0.0.1";
-        int port = 1991;
+        int port = 8000;
 
         try (Socket clientSocket = new Socket(host, port);
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);

@@ -8,7 +8,7 @@ import java.net.Socket;
 public class Server {
     public static void main(String[] args) throws IOException {
         System.out.println("Server started");
-        int port = 1991;
+        int port = 8000;
 
         try (ServerSocket serverSocket = new ServerSocket(port)){
             while (true) {
@@ -21,7 +21,12 @@ public class Server {
                 final String name = in.readLine();
 
                 out.println(String.format("Hello %s, your port is %d", name, clientSocket.getPort()));
+                clientSocket.close();
+                in.close();
+                out.close();
             }
+        } catch (IOException e) {
+            System.err.println(e);
         }
     }
 }
