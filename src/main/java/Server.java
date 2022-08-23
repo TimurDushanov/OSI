@@ -10,23 +10,23 @@ public class Server {
         System.out.println("Server started");
         int port = 8000;
 
-        try (ServerSocket serverSocket = new ServerSocket(port)){
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {
-                Socket clientSocket = serverSocket.accept();
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                try (Socket clientSocket = serverSocket.accept();
+                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
 
-                System.out.printf("New connection accepted. Port: %d%n", clientSocket.getPort());
 
-                final String name = in.readLine();
+                    System.out.printf("New connection accepted. Port: %d%n", clientSocket.getPort());
 
-                out.println(String.format("Hello %s, your port is %d", name, clientSocket.getPort()));
-                clientSocket.close();
-                in.close();
-                out.close();
+                    final String name = in.readLine();
+
+                    out.println(String.format("Hello %s, your port is %d", name, clientSocket.getPort()));
+
+                } catch (IOException e) {
+                    System.err.println(e);
+                }
             }
-        } catch (IOException e) {
-            System.err.println(e);
         }
     }
 }
