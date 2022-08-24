@@ -18,6 +18,9 @@ public class Client {
 
             String resp = in.readLine();
             System.out.println(resp);
+
+            out.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

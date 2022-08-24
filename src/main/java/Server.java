@@ -23,6 +23,8 @@ public class Server {
 
                     out.println(String.format("Hello %s, your port is %d", name, clientSocket.getPort()));
 
+                    out.flush();
+
                 } catch (IOException e) {
                     System.err.println(e);
                 }
