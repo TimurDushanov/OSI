@@ -27,6 +27,8 @@ public class Server {
                     System.err.println(e);
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
